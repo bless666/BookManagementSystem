@@ -86,7 +86,7 @@ namespace BookManagementSystem
                     //    }
                     //    break;
                     case "6":
-                        string option = ValidationHelper.ReadStringQuestionResponse("Are you sure you want to exit the library: Y/N");
+                        string option = ValidationHelper.ReadStringQuestionResponse("Are you sure you want to exit the library: Y/N ");
                         if (option.Equals("Y", StringComparison.OrdinalIgnoreCase))
                         {
                             exit = true;
