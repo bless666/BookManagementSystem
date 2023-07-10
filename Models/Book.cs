@@ -15,8 +15,8 @@ namespace LibraryApplication.Models
         private int availablecopies;
         private int totalcopies;
 
-        public string Title 
-        { 
+        public string Title
+        {
             get { return title; }
             set { title = value; }
         }
@@ -45,13 +45,13 @@ namespace LibraryApplication.Models
             set { totalcopies = value; }
         }
 
-        public Book(string title, string isbn, decimal rentalPrice, int availableCopies, int totalCopies)
+        public Book(string title, string isbn, decimal rentalPrice, int availableCopies)
         {
             this.title = title;
             this.isbn = isbn;
             this.rentalprice = rentalPrice;
             this.availablecopies = availableCopies;
-            this.totalcopies = totalCopies;
+            this.totalcopies = availableCopies;
         }
     }
 }

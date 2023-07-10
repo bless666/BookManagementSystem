@@ -1,9 +1,15 @@
-﻿namespace LibraryApplication.Helper
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LibraryApplication.Helpers
 {
-    public class Helper
+    public class ValidationHelper
     {
         //Parse the insert into a date with this specific format "dd/MM/yyyy"
-        public static DateTime ParseDate(string prompt)
+        public static DateTime IsDateValid(string prompt)
         {
             string dateString;
             DateTime parsedDate = DateTime.MinValue;
@@ -13,14 +19,14 @@
                 dateString = Console.ReadLine();
                 if (!DateTime.TryParseExact(dateString, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out parsedDate))
                 {
-                    Console.WriteLine("The inserted date is not in the specified format.");
+                    Console.WriteLine("The inserted date is not in the specified format. \n Please try again using the specified format.");
                 }
             } while (parsedDate == DateTime.MinValue);
             return parsedDate;
         }
 
         //Check if the insert is empty 
-        public static string ReadStringValue(string prompt)
+        public static string ReadNonEmptyStringValue(string prompt)
         {
             string value;
             do
@@ -42,7 +48,7 @@
             do
             {
                 Console.Write(prompt);
-                value = Console.ReadLine()?.ToUpperInvariant(); // Convert input to uppercase for case-insensitive comparison
+                value = Console.ReadLine()?.ToUpperInvariant();
                 if (value != "Y" && value != "N")
                 {
                     Console.WriteLine("Invalid input. Please enter 'Y' or 'N'.");
@@ -52,7 +58,7 @@
         }
 
         //Check if the inserted value is a int
-        public static int ReadIntValue(string prompt)
+        public static int ReadPositiveIntValue(string prompt)
         {
             int value;
             string input;
@@ -69,7 +75,7 @@
         }
 
         //Check if the inserted value is a decimal
-        public static decimal ReadDecimalValue(string prompt)
+        public static decimal ReadPositiveDecimalValue(string prompt)
         {
             decimal value;
             string input;

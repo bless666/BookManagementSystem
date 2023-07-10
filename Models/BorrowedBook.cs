@@ -12,41 +12,30 @@
             get { return borrowdate; }
             set { borrowdate = value; }
         }
-
         public string UserName
         {
             get { return userName; }
             set { userName = value; }
         }
-
         public bool Borrowed
         {
             get { return borrowed; }
             set { borrowed = value; }
         }
-
         public decimal Penalty
         {
             get { return penalty; }
             set { penalty = value; }
         }
 
-        public BorrowedBook(string title, string isbn, decimal rentalPrice, int availableCopies)
-            : base(title, isbn, rentalPrice, availableCopies, availableCopies)
+        public BorrowedBook(string title, string isbn, decimal rentalPrice, int availableCopies, 
+            DateTime borrowdate, string userName, bool borrowed, decimal penalty)
+            : base(title, isbn, rentalPrice, availableCopies)
         {
-            borrowdate = DateTime.MinValue;
-            userName = string.Empty;
-            borrowed = false;
-            penalty = 0.0m;
-        }
-
-        public void AddBorrowedBook(Book item)
-        {
-            Title = item.Title;
-            ISBN = item.ISBN;
-            RentalPrice = item.RentalPrice; 
-            AvailableCopies = item.AvailableCopies; 
-            TotalCopies = item.TotalCopies;
+            this.borrowdate = borrowdate;
+            this.userName = userName;
+            this.borrowed = borrowed;
+            this.penalty = penalty;
         }
     }
 }

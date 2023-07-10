@@ -1,4 +1,6 @@
-﻿namespace LibraryApplication
+﻿using LibraryApplication.Helpers;
+
+namespace LibraryApplication
 {
     public class Program
     {
@@ -31,26 +33,26 @@
                 switch (choice)
                 {
                     case "1":
-                        string title = Helper.Helper.ReadStringValue("Enter book title: ");
-                        string isbn = Helper.Helper.ReadStringValue("Enter ISBN: ");
-                        decimal rentalPrice = Helper.Helper.ReadDecimalValue("Enter rental price: ");
-                        int availableCopies = Helper.Helper.ReadIntValue("Enter number of available copies: ");
+                        string title = ValidationHelper.ReadNonEmptyStringValue("Enter book title: ");
+                        string isbn = ValidationHelper.ReadNonEmptyStringValue("Enter ISBN: ");
+                        decimal rentalPrice = ValidationHelper.ReadPositiveDecimalValue("Enter rental price: ");
+                        int availableCopies = ValidationHelper.ReadPositiveIntValue("Enter number of available copies: ");
                         library.AddBook(title, isbn, rentalPrice, availableCopies);
                         break;                  
                     case "2":
-                        string borrowTitle = Helper.Helper.ReadStringValue("Enter book title: ");
-                        string user = Helper.Helper.ReadStringValue("Enter your Name: ");
-                        DateTime borrowdate = Helper.Helper.ParseDate("Enter the borrow date using this format dd/MM/yyyy: ");
+                        string borrowTitle = ValidationHelper.ReadNonEmptyStringValue("Enter book title: ");
+                        string user = ValidationHelper.ReadNonEmptyStringValue("Enter your Name: ");
+                        DateTime borrowdate = ValidationHelper.IsDateValid("Enter the borrow date using this format dd/MM/yyyy: ");
                         library.BorrowBook(borrowTitle, user, borrowdate);
                         break;
                     case "3":
-                        string returnTitle = Helper.Helper.ReadStringValue("Enter book title: ");
-                        string username = Helper.Helper.ReadStringValue("Enter your Name: ");
-                        DateTime returndate = Helper.Helper.ParseDate("Enter the return date using this format dd/MM/yyyy: ");
+                        string returnTitle = ValidationHelper.ReadNonEmptyStringValue("Enter book title: ");
+                        string username = ValidationHelper.ReadNonEmptyStringValue("Enter your Name: ");
+                        DateTime returndate = ValidationHelper.IsDateValid("Enter the return date using this format dd/MM/yyyy: ");
                         library.ReturnBook(returnTitle, username, returndate);
                         break;
                     case "4":
-                        string availableTitle = Helper.Helper.ReadStringValue("Enter book title: ");
+                        string availableTitle = ValidationHelper.ReadNonEmptyStringValue("Enter book title: ");
                         library.AvailableCopiesInLibrary(availableTitle);
                         break;
                     case "5":
@@ -84,7 +86,7 @@
                     //    }
                     //    break;
                     case "6":
-                        string option = Helper.Helper.ReadStringQuestionResponse("Are you sure you want to exit the library: Y/N");
+                        string option = ValidationHelper.ReadStringQuestionResponse("Are you sure you want to exit the library: Y/N");
                         if (option.Equals("Y", StringComparison.OrdinalIgnoreCase))
                         {
                             exit = true;
@@ -92,10 +94,6 @@
                         else if (option.Equals("N", StringComparison.OrdinalIgnoreCase))
                         {
                             exit = false;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid choice. Please try again.");
                         }
                         break;
                     default:
