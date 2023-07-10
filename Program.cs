@@ -1,6 +1,6 @@
-﻿using LibraryApplication.Helpers;
+﻿using BookManagementSystem.Helpers;
 
-namespace LibraryApplication
+namespace BookManagementSystem
 {
     public class Program
     {

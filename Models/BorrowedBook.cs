@@ -1,4 +1,4 @@
-﻿namespace LibraryApplication.Models
+﻿namespace BookManagementSystem.Models
 {
     public class BorrowedBook : Book
     {

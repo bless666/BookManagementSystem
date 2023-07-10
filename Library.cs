@@ -1,7 +1,7 @@
-﻿using LibraryApplication.Models;
-using LibraryApplication.Helpers;
+﻿using BookManagementSystem.Models;
+using BookManagementSystem.Helpers;
 
-namespace LibraryApplication
+namespace BookManagementSystem
 {
     public class Library
     {
