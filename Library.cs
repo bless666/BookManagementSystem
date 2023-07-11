@@ -14,7 +14,15 @@ namespace BookManagementSystem
             borrowedbooks = new List<BorrowedBook>();
         }
 
-        //Adds a new book to the library or updates an existing one
+        /// <summary>
+        /// Adds a new book to the book collection. 
+        /// If a book with the same title already exists, it updates the number of available copies and, 
+        /// if necessary, the ISBN and rental price.
+        /// </summary>
+        /// <param name="title">The title of the book.</param>
+        /// <param name="isbn">The ISBN of the book.</param>
+        /// <param name="rentalPrice">The rental price of the book.</param>
+        /// <param name="availableCopies">The number of available copies of the book.</param>
         public void AddBook(string title, string isbn, decimal rentalPrice, int availableCopies)
         {
             Book existingBook = books.FirstOrDefault(book => book.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
@@ -48,49 +56,16 @@ namespace BookManagementSystem
             {
                 Console.WriteLine("The ISBN and the Rental Price remain the same.");
             }
-            Console.WriteLine($"Existing book '{existingBook.Title}' updated. Available copies: {existingBook.AvailableCopies}");
-            return;
-            
+            Console.WriteLine($"Existing book '{existingBook.Title}' updated. Available copies: {existingBook.AvailableCopies}");     
         }
 
-        //Returns all the books existing in the library
-        public List<Book> GetAllBooks()
-        {           
-            return books;
-        }
-
-        public Book GetBook(string title)
-        {
-            var book = books.FirstOrDefault(x => x.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
-            if(book != null)
-            {
-                return book;
-            }
-            return null;
-        }
-
-        //Shows how many copies of a book exists in the library
-        public void AvailableCopiesInLibrary(string title)
-        {
-            foreach (Book book in books)
-            {
-                if (book.Title.Equals(title, StringComparison.OrdinalIgnoreCase))
-                {
-                    if (book.AvailableCopies > 0)
-                    {
-                        Console.WriteLine($"Book '{title}' has {book.AvailableCopies} copies available.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Book '{title}' doesn't have any copies available.");
-                    }
-                    return;
-                }
-            }
-            Console.WriteLine($"Book '{title}' not found in the library.");
-        }
-
-        //Borrow a book from library
+        /// <summary>
+        /// Borrows a book from the library for a given user, 
+        /// recording the borrowing details and updating the book's availability.
+        /// </summary>
+        /// <param name="title">The title of the book to borrow.</param>
+        /// <param name="username">The username of the borrower.</param>
+        /// <param name="borrowdate">The date of borrowing.</param>
         public void BorrowBook(string title,string username, DateTime borrowdate)
         {
             var book = books.FirstOrDefault(x => x.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
@@ -116,7 +91,13 @@ namespace BookManagementSystem
         }
 
 
-        //Return a book to the library
+        /// <summary>
+        /// Returns a borrowed book to the library, updates the book's availability,
+        /// and calculates any applicable penalties for late returns.
+        /// </summary>
+        /// <param name="title">The title of the book to return.</param>
+        /// <param name="username">The username of the borrower.</param>
+        /// <param name="returndate">The date of return.</param>
         public void ReturnBook(string title, string username, DateTime returndate)
         {
             var book = books.FirstOrDefault(x => x.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
@@ -168,7 +149,45 @@ namespace BookManagementSystem
             }
         }
 
-        //Returns the number of available copies in the library. Used for test porposes
+        //Retrieves all the books existing in the library
+        public List<Book> GetAllBooks()
+        {
+            return books;
+        }
+
+        // Retrieves a book from the library based on its title.
+        public Book GetBook(string title)
+        {
+            var book = books.FirstOrDefault(x => x.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+            if (book != null)
+            {
+                return book;
+            }
+            return null;
+        }
+
+        // Checks the availability of copies for a book in the library.
+        public void AvailableCopiesInLibrary(string title)
+        {
+            foreach (Book book in books)
+            {
+                if (book.Title.Equals(title, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (book.AvailableCopies > 0)
+                    {
+                        Console.WriteLine($"Book '{title}' has {book.AvailableCopies} copies available.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Book '{title}' doesn't have any copies available.");
+                    }
+                    return;
+                }
+            }
+            Console.WriteLine($"Book '{title}' not found in the library.");
+        }
+
+        //Retrieves the number of available copies in the library. Used for test porposes
         public int GetAvailableCopies(string title)
         {
             foreach (Book book in books)
